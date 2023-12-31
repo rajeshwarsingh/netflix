@@ -1,8 +1,91 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 import Header from "./Header";
+import { checkValidData } from "../utils/validate";
+import { auth } from "../utils/firebase";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isSignInForm, setIsSignInForm] = useState(true);
+  const [errMessage, setErrMessage] = useState(null);
+
+  const username = useRef(null);
+  const email = useRef(null);
+  const password = useRef(null);
+
+  const handleButtonClick = () => {
+    let message = checkValidData(email.current.value, password.current.value);
+    // setErrMessage(message);
+
+    if (message) {
+      setErrMessage(message);
+    }
+
+    // Sign In/ Sign Up
+    if (!isSignInForm) {
+      // Sign Up
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+
+          updateProfile(user, {
+            displayName:  username.current.value,
+            photoURL: "https://avatars.githubusercontent.com/u/12775758?v=4",
+          })
+            .then(() => {
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(addUser({ uid, email, displayName, photoURL }));
+              // Profile updated!
+              navigate("/browse");
+            })
+            .catch((error) => {
+              // An error occurred
+              setErrMessage(error.message)
+            });
+
+          console.log("user :", user);
+          
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrMessage(`${errorCode} - ${errorMessage}`);
+        });
+    } else {
+      // Sign In
+
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log("login user :", user);
+          navigate("/browse");
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrMessage(`${errorCode} - ${errorMessage}`);
+        });
+    }
+  };
 
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
@@ -17,29 +100,39 @@ const Login = () => {
           alt="background img"
         />
       </div>
-      <form className=" w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white bg-opacity-80">
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className=" w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white bg-opacity-80"
+      >
         <h1 className="font-bold text-3xl py-4">
           {" "}
           {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
         {!isSignInForm && (
           <input
+            ref={username}
             type="text"
             placeholder="Full Name"
             className="my-4 p-4 w-full bg-gray-700"
           />
         )}
         <input
+          ref={email}
           type="text"
           placeholder="Email Address"
           className="my-4 p-4 w-full bg-gray-700"
         />
         <input
+          ref={password}
           type="password"
           placeholder="Password"
           className="my-4 p-4 w-full bg-gray-700"
         />
-        <button className="my-6 p-4 bg-red-700 w-full">
+        <p className="text-red-700 font-bold text-lg">{errMessage}</p>
+        <button
+          onClick={handleButtonClick}
+          className="my-6 p-4 bg-red-700 w-full"
+        >
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
         <p className="py-4 cursor-pointer" onClick={toggleSignInForm}>
