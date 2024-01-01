@@ -34,7 +34,12 @@ MY APP URL - https://netflix-16a52.web.app/
 - update store with trailer video data
 - Empaded the youtube video and make it autoplay and mute
 - added tailwind classes to look good
-- 
+- build secondary component
+- build movie list
+- build movie card
+- found out tmdb image cdn url
+- Make browse page better
+- Created use popular movie custom hook
 
  # Features
  - Login /Signup 
