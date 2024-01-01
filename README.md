@@ -1,6 +1,7 @@
 rafce - shortcut for functional component
 Use "formic" if you have many fields in form
 MY APP URL - https://netflix-16a52.web.app/
+<React.StrictMode> :- it makes 2 calls to check inconsistency between the rendering
 
 # Netflix app
 - Create react app
@@ -18,7 +19,22 @@ MY APP URL - https://netflix-16a52.web.app/
 - Implemented the signin user API
 - Created redux store with user slice
 - Implemented sign out feature
-- update profile 
+- update profile
+-  Bugfix - SIgn up user displayName and profile picture update
+- Bugfix - if the user is not logged in redirect /brose to login page and vice versa
+- unsubscribe to the onAuthStateChanged callback
+- add hardcode value from the constant  
+- Register TMDB and create a app and get access token
+- get Data from TMDB now playing  movie list api
+- Custom hook for know playing movies
+- Create movie slice
+- update store with movies data
+- planing for main and secondary container
+- Fetch data for trailer video
+- update store with trailer video data
+- Empaded the youtube video and make it autoplay and mute
+- added tailwind classes to look good
+- 
 
  # Features
  - Login /Signup 
