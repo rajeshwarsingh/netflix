@@ -2,6 +2,10 @@ rafce - shortcut for functional component
 Use "formic" if you have many fields in form
 MY APP URL - https://netflix-16a52.web.app/
 <React.StrictMode> :- it makes 2 calls to check inconsistency between the rendering
+deploy firebase in 3 step
+firebase login
+firebase init
+firebase deploy
 
 # Netflix app
 - Create react app
@@ -40,6 +44,11 @@ MY APP URL - https://netflix-16a52.web.app/
 - found out tmdb image cdn url
 - Make browse page better
 - Created use popular movie custom hook
+- GPT Search feature
+- GPT search page
+- GPT search bar
+- Multi Language feature in our app
+- GPT Integration(Get open api key)
 
  # Features
  - Login /Signup 

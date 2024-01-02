@@ -9,7 +9,8 @@ import { checkValidData } from "../utils/validate";
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
-import {USER_AVATAR} from "../utils/constants";
+import { USER_AVATAR } from "../utils/constants";
+import { BG_URL } from "../utils/constants";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ const Login = () => {
           const user = userCredential.user;
 
           updateProfile(user, {
-            displayName:  username.current.value,
+            displayName: username.current.value,
             photoURL: USER_AVATAR,
           })
             .then(() => {
@@ -51,9 +52,8 @@ const Login = () => {
             })
             .catch((error) => {
               // An error occurred
-              setErrMessage(error.message)
+              setErrMessage(error.message);
             });
-          
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -88,10 +88,7 @@ const Login = () => {
     <div className="">
       <Header />
       <div className="absolute">
-        <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/c31c3123-3df7-4359-8b8c-475bd2d9925d/15feb590-3d73-45e9-9e4a-2eb334c83921/IN-en-20231225-popsignuptwoweeks-perspective_alpha_website_large.jpg"
-          alt="background img"
-        />
+        <img src={BG_URL} alt="background img" />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
