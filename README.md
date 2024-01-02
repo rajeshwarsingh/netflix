@@ -1,3 +1,5 @@
+# Delete api key for GPT openai
+
 rafce - shortcut for functional component
 Use "formic" if you have many fields in form
 MY APP URL - https://netflix-16a52.web.app/
@@ -6,6 +8,9 @@ deploy firebase in 3 step
 firebase login
 firebase init
 firebase deploy
+
+GPT API
+https://platform.openai.com/
 
 # Netflix app
 - Create react app
@@ -49,6 +54,14 @@ firebase deploy
 - GPT search bar
 - Multi Language feature in our app
 - GPT Integration(Get open api key)
+- GPT search api call
+- fetch gpt movie suggtion from tmdb
+- created gpt slice
+- reused movie list component to make movie suggestion container
+- momoization
+- added .env file
+- added.eve file in gitignore
+- made site responsive
 
  # Features
  - Login /Signup 

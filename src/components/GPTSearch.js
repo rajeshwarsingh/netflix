@@ -5,13 +5,15 @@ import { BG_URL } from "../utils/constants";
 
 function GPTSearch() {
   return (
-    <div>
-      <div className="absolute -z-20">
-        <img src={BG_URL} alt="background img" />
+    <>
+      <div className="fixed -z-10">
+        <img className="h-screen md:h-auto object-cover md:object-none" src={BG_URL} alt="background img" />
       </div>
-      <GPTSearchBar />
-      <GPTMovieSuggestions />
-    </div>
+      <div className="">
+        <GPTSearchBar />
+        <GPTMovieSuggestions />
+      </div>
+    </>
   );
 }
 
